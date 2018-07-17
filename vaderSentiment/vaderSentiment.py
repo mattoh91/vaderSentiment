@@ -279,48 +279,6 @@ class SentimentIntensityAnalyzer(object):
         valence_dict = self.score_valence(sentiments, text)
 
         return valence_dict
-      
-    def polarity_expr(self, text):
-        """
-        Return a float for sentiment strength based on the input text.
-        Positive values are positive valence, negative value are negative
-        valence.
-        """
-        # convert emojis to their textual descriptions
-        text_token_list = text.split()
-        text_no_emoji_lst = []
-        for token in text_token_list:
-            if token in self.emojis:
-                # get the textual description
-                description = self.emojis[token]
-                text_no_emoji_lst.append(description)
-            else:
-                text_no_emoji_lst.append(token)
-        text = " ".join(x for x in text_no_emoji_lst)
-
-        sentitext = SentiText(text)
-
-        sentiments = []
-        words_and_emoticons = sentitext.words_and_emoticons
-        for item in words_and_emoticons:
-            valence = 0
-            i = words_and_emoticons.index(item)
-            # check for vader_lexicon words that may be used as modifiers or negations
-            if item.lower() in BOOSTER_DICT:
-                sentiments.append(valence)
-                continue
-            if (i < len(words_and_emoticons) - 1 and item.lower() == "kind" and
-                    words_and_emoticons[i + 1].lower() == "of"):
-                sentiments.append(valence)
-                continue
-
-            sentiments = self.sentiment_valence(valence, sentitext, item, i, sentiments)
-
-        sentiments = self._but_check(words_and_emoticons, sentiments)
-
-        valence_dict = self.score_valence(sentiments, text)
-
-        return sentiments
 
     def sentiment_valence(self, valence, sentitext, item, i, sentiments):
         is_cap_diff = sentitext.is_cap_diff
