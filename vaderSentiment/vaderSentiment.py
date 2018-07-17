@@ -279,8 +279,8 @@ class SentimentIntensityAnalyzer(object):
         valence_dict = self.score_valence(sentiments, text)
 
         return valence_dict
-      
-     def polarity_expr(self, text):
+
+    def polarity_scores(self, text):
         """
         Return a float for sentiment strength based on the input text.
         Positive values are positive valence, negative value are negative
@@ -321,7 +321,7 @@ class SentimentIntensityAnalyzer(object):
         valence_dict = self.score_valence(sentiments, text)
 
         return sentiments
-
+    
     def sentiment_valence(self, valence, sentitext, item, i, sentiments):
         is_cap_diff = sentitext.is_cap_diff
         words_and_emoticons = sentitext.words_and_emoticons
