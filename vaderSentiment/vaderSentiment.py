@@ -280,7 +280,7 @@ class SentimentIntensityAnalyzer(object):
 
         return valence_dict
 
-    def polarity_expr(self, text):
+    def val2vec(self, text):
         """
         Return a float for sentiment strength based on the input text.
         Positive values are positive valence, negative value are negative
