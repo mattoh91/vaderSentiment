@@ -282,9 +282,11 @@ class SentimentIntensityAnalyzer(object):
 
     def val2vec(self, text):
         """
-        Return a float for sentiment strength based on the input text.
-        Positive values are positive valence, negative value are negative
-        valence.
+        Custom method added.
+        Same code logic as the polarity_scores() method, except the non-sparse vector space model
+        of valence scores is returned through the final "return sentiment" statement.
+        In contrast, the polarity_scores() method returns "valence_dict", which is a dictionary
+        consisting compound, negative, neutral and positive valence scores per document.
         """
         # convert emojis to their textual descriptions
         text_token_list = text.split()
