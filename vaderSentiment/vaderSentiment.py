@@ -282,11 +282,15 @@ class SentimentIntensityAnalyzer(object):
 
     def val2vec(self, text):
         """
-        Custom method added.
-        Same code logic as the polarity_scores() method, except the non-sparse vector space model
-        of valence scores is returned through the final "return sentiment" statement.
-        In contrast, the polarity_scores() method returns "valence_dict", which is a dictionary
-        consisting compound, negative, neutral and positive valence scores per document.
+        Custom method added by mattoh91.
+        Same code logic as the polarity_scores() method, except the non-sparse vector space model of valence scores
+        corresponding to tokens within a document is returned through the final "return sentiment" statement.
+        eg. [token 1 val score, token 2 val score, ...], where the list is a vector space model of a document
+        
+        In contrast, the polarity_scores() method returns "valence_dict", which is a dictionary consisting overall
+        compound, negative, neutral and positive valence scores per document.
+        These overall scores are derived from the "score_valence()" and "_sift_sentiment_scores()" methods, which
+        sum up tokens with valence scores that are positive, negative, and neutral (0) separately. 
         """
         # convert emojis to their textual descriptions
         text_token_list = text.split()
